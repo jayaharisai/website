@@ -38,6 +38,7 @@ body{
     padding: 0px 2vh;
 }
 .menu li a{
+    font-size: clamp(0.2rem, -0.990rem + 5.333333vw, 1.2rem);
     color: white;
     text-decoration: none;
     font-weight: lighter;
@@ -55,17 +56,37 @@ body{
     
 }
 .section_two{
-    margin-top: 55%;
+    margin: auto;
+    margin-top: 50%;
     font-size: clamp(0.2rem, -0.990rem + 5.333333vw, 1.5rem);
+    background-color: rgba(41, 41, 41, 0.384);
+    width: 100%;
+    height: fit-content;
+    border-radius: 10px;
 }
 .box_two{
-    padding: 5vh;
+    padding: 2vh;
     text-align: center;
 }
 .comming_soon{
     font-size: clamp(1rem, -0.875rem + 8.333333vw, 7.5rem);
 }
-
+.detailss{
+    padding: 4vh 4vh;
+    text-align: left;
+}
+.tothala{
+    font-size: clamp(1rem, -0.875rem + 8.333333vw, 1.5rem);
+    letter-spacing: 20px;
+}
+.jayaharisai{
+    font-size: clamp(1rem, -0.875rem + 8.333333vw, 7.5rem);
+    letter-spacing: 10px;
+}
+.con{
+    font-size: clamp(0.8rem, -0.875rem + 6.333333vw, 0.5rem);
+    letter-spacing: 3px;
+}
 
 @media only screen and (max-width: 800px) {
 
@@ -84,6 +105,17 @@ body{
     }
     .video{
         width: 90%;
+    }
+    .tothala{
+        font-size: clamp(1rem, -0.875rem + 8.333333vw, 1rem);
+        letter-spacing: 10px;
+    }
+    .jayaharisai{
+        font-size: clamp(1rem, -0.875rem + 8.333333vw, 5.5rem);
+        letter-spacing: 5px;
+    }
+    .con{
+        letter-spacing: 0px;
     }
 
   }
