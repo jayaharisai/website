@@ -98,6 +98,7 @@ body{
 }
 .links li a{
     color: white;
+    font-size: clamp(0.8rem, -0.875rem + 6.333333vw, 0.5rem);
 }
 .links li a:hover{
     color: rgb(0, 153, 255);
