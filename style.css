@@ -73,25 +73,7 @@ body{
     font-size: clamp(1rem, -0.875rem + 8.333333vw, 2rem);
     letter-spacing: 5px;
 }
-.button_resume{
-    position: relative;
-    top: 4vh;
-    padding: 0px 11%;
-}
-.download{
-    border: none;
-    font-size: clamp(1rem, -0.875rem + 8.333333vw, 1.2rem);
-    padding: 1% 5%;
-    background-color: rgb(0, 255, 128);
-    border-radius: 5px;
-    transition: 200ms;
-}
-.download:hover{
-    cursor: pointer;
-    background-color: rgb(0, 209, 105);
-    box-shadow: 0px 0px 10px 1px rgb(0, 255, 128);
-    color: white;
-}
+
 .footer{
     padding: 5vh;
     display: flex;
