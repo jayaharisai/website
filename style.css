@@ -179,4 +179,16 @@ body{
         top: 5.5vh;
         padding: 0px 10.5%;
     }
+    .footer{
+        display: block;
+        text-align: center;
+    }
+    .bbb{
+        position: relative;
+        justify-content: center;
+    }
+    .links_menu ul{
+        position: relative;
+        justify-content: center;
+    }
   }
