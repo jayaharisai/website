@@ -5,7 +5,7 @@ body{
     color: white;
 }
 .box{
-    margin: 10vh 0vh 2vh 0vh;
+    margin: 10vh 0vh 0vh 0vh;
 }
 .details{
     margin: auto;
@@ -45,7 +45,7 @@ body{
 .video{
     position: absolute;
     width: 63%;
-    opacity: 0.3;
+
 }
 .hello{
     position: relative;
@@ -54,55 +54,89 @@ body{
     font-size: clamp(1rem, -0.875rem + 8.333333vw, 7.5rem);
     
 }
-.section_two{
-    margin: auto;
-    margin-top: 50%;
-    font-size: clamp(0.2rem, -0.990rem + 5.333333vw, 1.5rem);
-    background-color: rgba(41, 41, 41, 0.384);
-    width: 100%;
-    height: fit-content;
-    border-radius: 10px;
+
+.intro{
+    position: relative;
+    top: 5vh;
+    padding: 7% 11% ;
 }
-.box_two{
-    padding: 2vh;
-    text-align: center;
+.thought{
+    position: relative;
+    top: 1vh;
+    padding: 0px 11%;
 }
-.comming_soon{
-    font-size: clamp(1rem, -0.875rem + 8.333333vw, 7.5rem);
+.i_am{
+    font-size: clamp(1rem, -0.875rem + 8.333333vw, 1.2rem);
+    font-weight: bold;
 }
-.detailss{
-    padding: 4vh 4vh;
-    text-align: left;
+.name{
+    font-size: clamp(1rem, -0.875rem + 8.333333vw, 2rem);
+    letter-spacing: 5px;
 }
-.tothala{
-    font-size: clamp(1rem, -0.875rem + 8.333333vw, 1.5rem);
-    letter-spacing: 20px;
+.button_resume{
+    position: relative;
+    top: 4vh;
+    padding: 0px 11%;
 }
-.jayaharisai{
-    font-size: clamp(1rem, -0.875rem + 8.333333vw, 7.5rem);
-    letter-spacing: 10px;
+.download{
+    border: none;
+    font-size: clamp(1rem, -0.875rem + 8.333333vw, 1.2rem);
+    padding: 1% 5%;
+    background-color: rgb(0, 255, 128);
+    border-radius: 5px;
+    transition: 200ms;
 }
-.con{
-    font-size: clamp(0.8rem, -0.875rem + 6.333333vw, 0.5rem);
-    letter-spacing: 3px;
-}
-.links{
-    list-style: none;
-    padding: 0px;
-    display: flex;
-    justify-content: right;
-}
-.links li{
-    padding: 0px 10px;
-}
-.links li a{
+.download:hover{
+    cursor: pointer;
+    background-color: rgb(0, 209, 105);
+    box-shadow: 0px 0px 10px 1px rgb(0, 255, 128);
     color: white;
-    font-size: clamp(0.8rem, -0.875rem + 6.333333vw, 0.5rem);
 }
-.links li a:hover{
-    color: rgb(0, 153, 255);
+.footer{
+    padding: 5vh;
+    display: flex;
+    background-color: rgb(255, 255, 255);
+    align-items: center;
+    justify-content: space-around;
 }
 
+.footer_menu ul, .links_menu ul{
+    list-style: none;
+    padding: 0px;
+}
+.links_menu ul{
+    display: flex;
+}
+.footer_menu ul li a, .links_menu ul li a{
+    color: black;
+    text-decoration: none;
+}
+.links_menu ul li{
+    padding: 0px 10px;
+}
+
+.send_border{
+    border-bottom: 1px solid rgba(128, 128, 128, 0.267);
+}
+.send_input{
+    font-size: clamp(1rem, -0.875rem + 8.333333vw, 1.2rem);
+    padding: 10px;
+    border: none;
+}
+.send_input:focus{
+    outline: none;
+}
+.subscribe{
+    border:none;
+    padding: 10px;
+    font-size: clamp(1rem, -0.875rem + 8.333333vw, 1.2rem);
+    background-color: rgb(0, 255, 128);
+    border-radius: 5px;
+}
+.bbb{
+    display: flex;
+    align-items: center;
+}
 @media only screen and (max-width: 800px) {
 
     .top_bar{
@@ -116,21 +150,33 @@ body{
         justify-content: center;
     }
     .details{
-        width: 90%;
+        width: 100%;
     }
     .video{
-        width: 90%;
+        width: 100%;
     }
-    .tothala{
+    .intro{
+        position: relative;
+        top: 7vh;
+        padding: 7% 10.5% ;
+    }
+    .thought{
+        position: relative;
+        top: 5vh;
+        padding: 0px 10.5%;
+    }
+    .i_am{
         font-size: clamp(1rem, -0.875rem + 8.333333vw, 1rem);
-        letter-spacing: 10px;
+        font-weight: bold;
     }
-    .jayaharisai{
-        font-size: clamp(1rem, -0.875rem + 8.333333vw, 5.5rem);
-        letter-spacing: 5px;
+    .name{
+        font-size: clamp(1rem, -0.875rem + 8.333333vw, 1rem);
     }
-    .con{
-        letter-spacing: 0px;
+    .download{
+        padding: 5px 10px;
     }
-
+    .button_resume{
+        top: 5.5vh;
+        padding: 0px 10.5%;
+    }
   }
