@@ -104,6 +104,8 @@ body{
     font-size: clamp(1rem, -0.875rem + 8.333333vw, 1.2rem);
     padding: 10px;
     border: none;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    letter-spacing: 4px;
 }
 .send_input:focus{
     outline: none;
@@ -128,6 +130,8 @@ body{
     text-align: center;
     font-size: clamp(1rem, -0.875rem + 8.333333vw, 3rem);
     font-weight: lighter;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.103);
+    
 }
 .subtask{
     display: flex;
@@ -146,14 +150,27 @@ body{
 }
 .doc ul li{
     padding: 10px;
+    transition: 500ms;
+}
+.doc ul li a{
+    color: white;
+    text-decoration: none;
+}
+.doc ul li:hover{
+    transform: scale(1.02);
 }
 .description{
-    width: 70%;
+    width: 80%;
 }
+.heading{
+    text-align: left;
+}
+
+
 .hr{
     border: 0px;
     height: 1px;
-    background-color: rgba(240, 248, 255, 0.274);
+    background-color: rgba(240, 248, 255, 0.144);
     width: 25%;
     position: absolute;
     text-align: left;
@@ -227,10 +244,17 @@ body{
         text-align: center;
     }
     .description{
+        text-align: left;
         width: fit-content;
     }
     .hr{
         position: relative;
         width: 100%;
+    }
+    .section_two{
+        margin-top: 25vh;
+    }
+    .artica{
+        margin-top: 10vh;
     }
   }
