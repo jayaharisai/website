@@ -12,7 +12,7 @@ body{
     background-color: rgb(20, 20, 20);
     color: white;
     width: 63%;
-    height: 150vh;
+    height: 250vh;
 }
 .j{
     font-size: 4vh;
@@ -120,6 +120,50 @@ body{
     display: flex;
     align-items: center;
 }
+.section_two{
+    margin-top: 30vh;
+}
+
+.artical{
+    text-align: center;
+    font-size: clamp(1rem, -0.875rem + 8.333333vw, 3rem);
+    font-weight: lighter;
+}
+.subtask{
+    display: flex;
+    padding: 20px;
+}
+
+.docs{
+    flex: 5;
+}
+.artica{
+    flex: 5;
+}
+.doc ul{
+ list-style: none;
+ padding: 0px;
+}
+.doc ul li{
+    padding: 10px;
+}
+.description{
+    width: 70%;
+}
+.hr{
+    border: 0px;
+    height: 1px;
+    background-color: rgba(240, 248, 255, 0.274);
+    width: 25%;
+    position: absolute;
+    text-align: left;
+}
+.ss{
+    font-size: clamp(1rem, -0.875rem + 8.333333vw, 3rem);
+}
+.sss{
+    text-align: center;
+}
 @media only screen and (max-width: 800px) {
 
     .top_bar{
@@ -176,5 +220,17 @@ body{
     }
     .content{
         text-align: center;
+    }
+    .subtask{
+        display: block;
+        padding: 20px;
+        text-align: center;
+    }
+    .description{
+        width: fit-content;
+    }
+    .hr{
+        position: relative;
+        width: 100%;
     }
   }
