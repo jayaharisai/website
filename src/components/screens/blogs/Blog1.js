@@ -46,7 +46,7 @@ function Blog1() {
                     <div className='section reveal'>
                         <div className='heading1'>1. The Ideation Phase: Solving for "Why"</div>
                         <div className='paragraph'>
-                            Great startups don't <a href='' className='violet-link'>start with a solution; they start with a deep-seated frustration.</a> If you aren't solving a problem that keeps people up at night, you're building a "vitamin" (something nice to have) rather than a "painkiller" (something essential). The ideation phase is about discovering where the world is broken. This requires stepping outside your bubble and engaging in radical empathy with potential customers.
+                            Great startups don't <span className='violet-link'>start with a solution; they start with a deep-seated frustration.</span> If you aren't solving a problem that keeps people up at night, you're building a "vitamin" (something nice to have) rather than a "painkiller" (something essential). The ideation phase is about discovering where the world is broken. This requires stepping outside your bubble and engaging in radical empathy with potential customers.
                         </div>
                         <div className='paragraph'>
                             Validation in this stage isn't about getting people to say "your idea is cool." It's about finding people who are actively trying to solve the problem themselves using clunky, makeshift workarounds. If they aren't trying to solve the problem today, it likely isn't painful enough.
