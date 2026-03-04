@@ -1,0 +1,388 @@
+.blog_container {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+::selection {
+    background-color: #8a2be2;
+    color: white;
+}
+
+::-moz-selection {
+    background-color: #8a2be2;
+    color: white;
+}
+
+.datetime {
+    font-size: 14px;
+    font-weight: 300;
+    color: rgb(123, 123, 123);
+    letter-spacing: 1px;
+    text-align: center;
+    margin: 100px 0px 40px 0px;
+}
+
+.title {
+    font-size: 32px;
+    width: 50%;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 40px;
+}
+
+#blog-to-pdf {
+    background: white;
+}
+
+.description {
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: rgb(99, 99, 99);
+    font-weight: 200;
+    margin: auto;
+    width: 55%;
+    text-align: center;
+}
+
+.blog_content {
+    margin: 100px 0px;
+}
+
+.paragraph {
+    font-size: 16px;
+    line-height: 30px;
+    letter-spacing: 1px;
+    color: rgb(46, 46, 46);
+    font-weight: 100;
+    width: 70%;
+    margin: auto;
+    margin-top: 15px;
+}
+
+.violet-link {
+    color: #8a2be2;
+    text-decoration: underline dotted;
+    background-color: rgba(138, 43, 226, 0.2);
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+.main_letter {
+    font-size: 34px;
+    font-weight: 600;
+}
+
+.section {
+    margin-top: 30px;
+}
+
+.heading1 {
+    font-size: 24px;
+    width: 70%;
+    margin: auto;
+
+}
+
+.heading2 {
+    font-size: 18px;
+    width: 70%;
+    margin: auto;
+}
+
+.heading3 {
+    font-size: 16px;
+    width: 70%;
+    margin: auto;
+}
+
+.heading4 {
+    font-size: 16px;
+    width: 70%;
+    margin: auto;
+    font-style: italic
+}
+
+.quotes {
+    margin: auto;
+    width: 50%;
+    font-size: 36px;
+    font-style: italic;
+    font-weight: 200;
+    margin-top: 100px;
+    letter-spacing: 1px;
+    margin-bottom: 100px;
+}
+
+.image_explain {
+    display: flex;
+}
+
+.image {
+    flex: 1;
+    height: 20px;
+    /* background-color: #8a2be2; */
+}
+
+.image img {
+    /* width: 100%; */
+    object-fit: cover;
+    height: 300px;
+}
+
+.explain {
+    flex: 3;
+    height: fit-content;
+    width: 100%;
+}
+
+.large_image {
+    margin: 100px 0px;
+}
+
+.large_image img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.tags ul {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    display: flex;
+    column-gap: 15px;
+}
+
+.tags {
+    margin: 90px 0px;
+}
+
+.tags ul li {
+    background-color: rgb(239, 239, 239);
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: rgb(68, 68, 68);
+}
+
+/* ========================= */
+/* SMOOTH PAGE LOAD FADE IN  */
+/* ========================= */
+
+.fade-in {
+    animation: fadePage 1.2s ease-in-out;
+}
+
+@keyframes fadePage {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+/* ========================= */
+/* SCROLL REVEAL ANIMATION  */
+/* ========================= */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.9s ease;
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0px);
+    margin: 50px 0px;
+}
+
+/* ========================= */
+/* EXTRA SMOOTH SCROLL      */
+/* ========================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* ========================= */
+/* RESPONSIVE MEDIA QUERIES  */
+/* ========================= */
+
+/* 4K and Ultra-wide Screens */
+@media (min-width: 2560px) {
+    .blog {
+        max-width: 1400px;
+    }
+
+    .title {
+        font-size: 48px;
+    }
+
+    .description,
+    .paragraph,
+    .heading1,
+    .heading2,
+    .heading3,
+    .heading4 {
+        font-size: 20px;
+        line-height: 40px;
+    }
+
+    .quotes {
+        font-size: 52px;
+    }
+}
+
+/* 2K Screens */
+@media (min-width: 2000px) and (max-width: 2559px) {
+    .blog {
+        max-width: 1200px;
+    }
+
+    .title {
+        font-size: 40px;
+    }
+
+    .paragraph {
+        font-size: 18px;
+        line-height: 36px;
+    }
+}
+
+/* Large Laptops / 1440p */
+@media (min-width: 1440px) {
+    .blog {
+        max-width: 1000px;
+    }
+}
+
+/* Tablets (Portrait and Landscape) */
+@media (max-width: 1024px) {
+    .blog_container {
+        width: 90%;
+    }
+
+    .title {
+        width: 80%;
+        font-size: 28px;
+    }
+
+    .description {
+        width: 80%;
+    }
+
+    .paragraph,
+    .heading1,
+    .heading2,
+    .heading3,
+    .heading4 {
+        width: 90%;
+    }
+
+    .quotes {
+        width: 85%;
+        font-size: 24px;
+        margin-top: 60px;
+        margin-bottom: 60px;
+    }
+
+    .image_explain {
+        flex-direction: column;
+    }
+
+    .image img {
+        height: 400px;
+    }
+
+    .explain {
+        height: fit-content;
+        padding-top: 20px;
+    }
+
+    .tags ul {
+        flex-wrap: wrap;
+        row-gap: 10px;
+    }
+}
+
+/* Mobile Devices */
+@media (max-width: 768px) {
+    .blog_container {
+        width: 95%;
+    }
+
+    .datetime {
+        margin: 50px 0px 20px 0px;
+        font-size: 12px;
+    }
+
+    .title {
+        width: 100%;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .description {
+        width: 100%;
+        font-size: 11px;
+    }
+
+    .blog_content {
+        margin: 50px 0px;
+    }
+
+    .paragraph,
+    .heading1,
+    .heading2,
+    .heading3,
+    .heading4 {
+        width: 100%;
+        font-size: 15px;
+        line-height: 26px;
+    }
+
+    .main_letter {
+        font-size: 28px;
+    }
+
+    .heading1 {
+        font-size: 20px;
+    }
+
+    .heading2 {
+        font-size: 18px;
+    }
+
+    .quotes {
+        width: 100%;
+        font-size: 20px;
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+
+    .large_image {
+        margin: 50px 0px;
+    }
+
+    .large_image img {
+        height: 250px;
+    }
+
+    .image img {
+        height: 250px;
+    }
+
+    .tags {
+        margin: 40px 0px;
+    }
+}
