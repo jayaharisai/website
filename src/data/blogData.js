@@ -1,4 +1,3 @@
-// import { text } from "framer-motion/client";
 
 export const menuItems = ["All", "News", "Reviews", "Tips", "Products", "Startups", "Large Language Models (LLMs)"];
 

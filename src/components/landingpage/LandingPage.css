@@ -2,14 +2,10 @@ html,
 body {
     scroll-behavior: smooth;
     height: auto;
-}
-
-.lenis.lenis-smooth {
-    scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-    overscroll-behavior: contain;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
 .lenis.lenis-stopped {
@@ -50,20 +46,32 @@ body {
 .menu_wrapper {
     position: relative;
     display: inline-flex;
+    max-width: 100%;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.menu_wrapper::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari and Opera */
 }
 
 .menu ul {
-    padding: 8px 20px 8px 4px;
+    padding: 8px 10px 8px 4px;
     margin: 0;
     list-style: none;
     display: flex;
     align-items: center;
-    column-gap: 10px;
+    column-gap: 5px;
     background: #687351;
-    width: fit-content;
+    width: max-content;
     color: white;
     border-radius: 50px;
     position: relative;
+    white-space: nowrap;
 }
 
 .menu ul li {
@@ -234,22 +242,88 @@ body {
         column-gap: 20px;
     }
 
-    .landingpage_title{
+    .landingpage_title {
         font-size: 24px;
     }
 }
 
-@media (max-width: 768px) {
-    .masonry_container {
+/* Tablet and Small Laptops */
+@media (max-width: 1100px) {
+    .landingpage_card {
+        height: auto;
         flex-direction: column;
     }
 
-    .landingpage_title{
+    .landingpage_text {
+        border-radius: 20px;
+        padding-bottom: 50px;
+        width: 100%;
+        flex: 1;
+    }
+
+    .landingpage_image {
+        display: none;
+    }
+
+    .landingpage_title {
+        font-size: 32px;
+        margin-top: 40px;
+    }
+
+    .full_artical_container {
+        margin-top: 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    .landing_container {
+        width: 95%;
+    }
+
+    .main_title {
+        font-size: 42px;
+    }
+
+    .landingpage_card {
+        flex-direction: column;
+        height: auto;
+        border-radius: 20px;
+    }
+
+    .landingpage_text {
+        border-radius: 20px;
+        padding-bottom: 40px;
+        width: 100%;
+        flex: 1;
+    }
+
+    .landingpage_image {
+        display: none;
+    }
+
+    .landingpage_title {
         font-size: 24px;
+        width: 90%;
+        margin-top: 30px;
+    }
+
+    .landingpage_description {
+        width: 90%;
+    }
+
+    .full_artical_container {
+        width: 90%;
+        margin-top: 40px;
+    }
+
+    .masonry_container {
+        flex-direction: column;
+        row-gap: 60px;
     }
 
     .masonry_column {
         width: 100%;
+        row-gap: 60px;
     }
 }
 
