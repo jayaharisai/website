@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { canOptimize } from "@/lib/image-hosts";
 import Link from "next/link";
 import { ArrowRight, Clock } from "lucide-react";
 import "./post-card.css";
@@ -43,7 +44,14 @@ export default function PostCard({
           </p>
         </div>
         <div className="post-card__media">
-          <Image src={image} alt="" fill unoptimized sizes="170px" className="post-card__image" />
+          <Image
+            src={image}
+            alt=""
+            fill
+            unoptimized={!canOptimize(image)}
+            sizes="170px"
+            className="post-card__image"
+          />
         </div>
       </div>
     </Link>

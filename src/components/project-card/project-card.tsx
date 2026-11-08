@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { canOptimize } from "@/lib/image-hosts";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import "./project-card.css";
@@ -27,7 +28,7 @@ export default function ProjectCard({
             src={image}
             alt=""
             fill
-            unoptimized
+            unoptimized={!canOptimize(image)}
             sizes="(max-width: 559px) 100vw, 320px"
             className="project-card__image"
           />

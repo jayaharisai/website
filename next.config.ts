@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { IMAGE_HOSTS } from "./src/lib/image-hosts";
 
 const securityHeaders = [
   { key: "X-Content-Type-Options", value: "nosniff" },
@@ -22,6 +23,12 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   cacheComponents: true,
   poweredByHeader: false,
+  images: {
+    remotePatterns: IMAGE_HOSTS.map((hostname) => ({ protocol: "https" as const, hostname })),
+    formats: ["image/avif", "image/webp"],
+    // Notion's signed image links last 1 hour, so keeping optimized copies that long is safe.
+    minimumCacheTTL: 3600,
+  },
   // Dev only: lets phones/tablets on the same Wi-Fi load the dev server.
   allowedDevOrigins: ["192.168.*.*", "10.*.*.*", "172.*.*.*", "*.local"],
   async headers() {

@@ -30,7 +30,6 @@ export default function AboutIntro({
           src={image}
           alt={imageAlt}
           fill
-          unoptimized
           priority
           sizes="(max-width: 1023px) 100vw, 280px"
           className="about-intro__image"

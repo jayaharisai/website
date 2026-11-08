@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { canOptimize } from "@/lib/image-hosts";
 import "./image-figure.css";
 
 type ImageFigureProps = {
@@ -23,7 +24,7 @@ export default function ImageFigure({
           src={src}
           alt={alt || caption || ""}
           fill
-          unoptimized
+          unoptimized={!canOptimize(src)}
           priority={priority}
           sizes="(max-width: 767px) 100vw, 900px"
           className="image-figure__image"
