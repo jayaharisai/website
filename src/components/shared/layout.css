@@ -5,6 +5,8 @@
   gap: 40px;
   width: 75%;
   margin: 0 auto;
+  /* Fill the first screen (minus the navbar) so the footer starts below the fold. */
+  min-height: calc(100dvh - 76px);
   padding: 64px 0;
 }
 
@@ -28,6 +30,7 @@
 @media (max-width: 767px) {
   .page-container {
     width: calc(100% - 32px);
+    min-height: calc(100dvh - 64px);
     padding: 40px 0;
   }
 }

@@ -6,8 +6,8 @@ export default function Hero() {
     <section className="hero">
       <h1 className="heading-1">Hello, I&apos;m Jayaharisai</h1>
       <p className="description">
-        A passionate frontend developer with a keen eye for design and a love for creating
-        beautiful, functional web experiences.
+        Senior Software Engineer building with LLMs, fine-tuning and AI agents. Outside work, I
+        travel, explore and try new things.
       </p>
     </section>
   );

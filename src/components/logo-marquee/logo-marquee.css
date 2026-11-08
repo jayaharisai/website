@@ -12,6 +12,10 @@
   animation: logo-marquee-scroll var(--marquee-duration, 32s) linear infinite;
 }
 
+.logo-marquee[data-reverse] .logo-marquee__track {
+  animation-direction: reverse;
+}
+
 .logo-marquee:hover .logo-marquee__track {
   animation-play-state: paused;
 }
@@ -41,6 +45,22 @@
 }
 
 .logo-marquee__item:hover .logo-marquee__wordmark {
+  color: var(--foreground);
+}
+
+.logo-marquee__tool {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  color: var(--text-muted);
+  transition: color 250ms ease;
+}
+
+.logo-marquee__item:hover .logo-marquee__tool {
   color: var(--foreground);
 }
 

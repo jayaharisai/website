@@ -1,6 +1,8 @@
 .home {
   width: 60%;
   margin: 0 auto;
+  /* Fill the first screen (minus the navbar) so the footer starts below the fold. */
+  min-height: calc(100dvh - 76px);
   padding: 224px 0 64px;
   text-align: left;
 }
@@ -22,6 +24,7 @@
 @media (max-width: 767px) {
   .home {
     width: calc(100% - 32px);
+    min-height: calc(100dvh - 64px);
     padding: 170px 0 40px;
   }
 }

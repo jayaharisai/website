@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { DM_Sans } from "next/font/google";
 import Script from "next/script";
 import { Background } from "@/components/background";
+import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import "./globals.css";
 
@@ -15,7 +16,8 @@ export const metadata: Metadata = {
     default: "Jayaharisai | Portfolio",
     template: "%s | Jayaharisai",
   },
-  description: "Personal engineering portfolio: projects, posts and notes.",
+  description:
+    "Jayaharisai, Senior Software Engineer working with LLMs, fine-tuning and AI agents. Projects, posts and notes.",
 };
 
 export const viewport: Viewport = {
@@ -41,6 +43,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Background />
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );

@@ -7,3 +7,9 @@
     gap: 56px;
   }
 }
+
+.about-page__marquees {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
