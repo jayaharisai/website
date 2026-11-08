@@ -1,11 +1,18 @@
-# Checks every push and pull request: install, lint, type-check and build.
+# Checks every push and pull request: code quality, a production build and a Storybook build.
 # Deployment is handled by Vercel, so this workflow does not publish anything.
+#
+# Optional repository secrets (Settings > Secrets and variables > Actions). With them the
+# build loads your real Notion content, which proves the Notion connection works. Without
+# them the build still passes and the Projects/Posts/Notes pages are simply empty.
+#   NOTION_API_KEY, NOTION_PROJECTS_DATABASE_ID, NOTION_POSTS_DATABASE_ID,
+#   NOTION_NOTES_DATABASE_ID, REVALIDATE_SECRET
 name: CI
 
 on:
   push:
     branches: ["main"]
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -14,28 +21,102 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
-jobs:
-  check:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+env:
+  NODE_VERSION: "22"
+  NEXT_TELEMETRY_DISABLED: "1"
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+jobs:
+  quality:
+    name: Format, lint and types
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: ${{ env.NODE_VERSION }}
           cache: npm
 
       - name: Install dependencies
         run: npm ci
 
+      - name: Check formatting
+        run: npm run format:check
+
       - name: Lint
         run: npm run lint
 
-      - name: Build
-        run: npm run build
+      - name: Generate route types
+        run: npx next typegen
 
-      # After the build, because Next.js generates the route types the check needs.
       - name: Type-check
         run: npm run typecheck
+
+  build:
+    name: Production build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Restore Next.js build cache
+        uses: actions/cache@v4
+        with:
+          path: .next/cache
+          key: nextjs-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-${{ hashFiles('src/**') }}
+          restore-keys: |
+            nextjs-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          # Secrets are empty on pull requests from forks, which is fine: the site then builds
+          # with no Notion content.
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_PROJECTS_DATABASE_ID: ${{ secrets.NOTION_PROJECTS_DATABASE_ID }}
+          NOTION_POSTS_DATABASE_ID: ${{ secrets.NOTION_POSTS_DATABASE_ID }}
+          NOTION_NOTES_DATABASE_ID: ${{ secrets.NOTION_NOTES_DATABASE_ID }}
+          REVALIDATE_SECRET: ${{ secrets.REVALIDATE_SECRET }}
+
+  storybook:
+    name: Storybook build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Storybook
+        run: npm run build-storybook -- --quiet
+
+  audit:
+    name: Dependency audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    # Informational: a newly published advisory should not block unrelated work.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
