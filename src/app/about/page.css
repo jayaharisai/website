@@ -1,0 +1,9 @@
+.about-page {
+  gap: 96px;
+}
+
+@media (max-width: 767px) {
+  .about-page {
+    gap: 56px;
+  }
+}

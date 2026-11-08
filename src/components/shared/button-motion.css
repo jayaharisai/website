@@ -1,0 +1,55 @@
+/*
+ * Shared hover / press motion for every button component.
+ * A button opts in with the `.btn-motion` class and may set
+ * --btn-dotted-color to choose the colour of the dotted ring.
+ */
+.btn-motion {
+  position: relative;
+  transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Thin dashed ring, 1px gap outside the button's own border. */
+.btn-motion::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border: 1px dashed var(--btn-dotted-color, var(--foreground));
+  border-radius: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 250ms ease;
+}
+
+.btn-motion:hover {
+  transform: scale(1.04);
+}
+
+.btn-motion:hover::after {
+  opacity: 1;
+}
+
+.btn-motion:active {
+  transform: scale(0.97);
+  transition-duration: 100ms;
+}
+
+.btn-motion .btn-motion__icon {
+  transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-motion:hover .btn-motion__icon {
+  transform: translateX(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-motion,
+  .btn-motion::after,
+  .btn-motion .btn-motion__icon {
+    transition: none;
+  }
+
+  .btn-motion:hover,
+  .btn-motion:hover .btn-motion__icon {
+    transform: none;
+  }
+}

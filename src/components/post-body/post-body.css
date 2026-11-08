@@ -1,0 +1,90 @@
+/* Long-form reading styles: 18px text, 1.8 line height, comfortable measure. */
+.post-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 18px;
+  line-height: 1.8;
+  color: color-mix(in srgb, var(--foreground) 82%, transparent);
+}
+
+.post-body p {
+  margin: 0;
+}
+
+.post-body__heading {
+  margin: 20px 0 -4px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--foreground);
+  scroll-margin-top: 100px; /* clears the sticky navbar */
+}
+
+.post-body__h2 {
+  font-size: 26px;
+}
+
+.post-body__h3 {
+  margin-top: 12px;
+  font-size: 21px;
+}
+
+.post-body__h4 {
+  margin-top: 8px;
+  font-size: 18px;
+}
+
+.post-body__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding-left: 24px;
+  list-style: disc;
+}
+
+.post-body__list--ordered {
+  list-style: decimal;
+}
+
+/* Sub-lists use a different marker so the levels are easy to tell apart. */
+.post-body__nested .post-body__list {
+  list-style: circle;
+}
+
+.post-body__nested .post-body__list--ordered {
+  list-style: lower-alpha;
+}
+
+.post-body__list li::marker {
+  color: var(--text-muted);
+}
+
+.post-body__nested {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.post-body__divider {
+  width: 100%;
+  margin: 8px 0;
+  border: 0;
+  border-top: 1px dashed var(--border-strong);
+}
+
+@media (max-width: 559px) {
+  .post-body {
+    font-size: 16px;
+  }
+
+  .post-body__h2 {
+    font-size: 22px;
+  }
+
+  .post-body__h3 {
+    font-size: 19px;
+  }
+}

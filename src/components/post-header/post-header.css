@@ -1,0 +1,104 @@
+.post-header {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.post-header__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+
+.post-header__back:hover {
+  color: var(--foreground);
+}
+
+.post-header__back:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Centered title block: gives posts a more editorial feel than project pages. */
+.post-header__titles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.post-header__tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.post-header__tags li {
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  border: 1px dashed var(--border-strong);
+  border-radius: 999px;
+}
+
+.post-header__title {
+  max-width: 18ch;
+  font-size: 40px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.post-header__description {
+  max-width: 52ch;
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.post-header__meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.post-header__dot {
+  width: 3px;
+  height: 3px;
+  background: currentColor;
+  border-radius: 50%;
+}
+
+.post-header__read {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+@media (max-width: 559px) {
+  .post-header__title {
+    font-size: 30px;
+  }
+
+  .post-header__description {
+    font-size: 16px;
+  }
+}

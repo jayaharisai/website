@@ -1,0 +1,14 @@
+/* Shared text classes. Attach them to any element. */
+.heading-1 {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--foreground);
+}
+
+.description {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--text-muted);
+}

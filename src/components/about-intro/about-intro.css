@@ -1,0 +1,70 @@
+.about-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  align-items: start;
+  gap: 56px;
+}
+
+.about-intro__label {
+  margin: 0 0 28px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* Large, tight editorial paragraphs. */
+.about-intro__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 34em;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+.about-intro__copy p {
+  margin: 0;
+}
+
+.about-intro__photo {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--background-tint);
+  border-radius: 16px;
+}
+
+.about-intro__image {
+  object-fit: cover;
+  object-position: center 65%;
+}
+
+/* Tablet and mobile: stack, and let the photo fill the full width. */
+@media (max-width: 1023px) {
+  .about-intro {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+
+  .about-intro__photo {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+  }
+
+  .about-intro__image {
+    object-position: center 60%;
+  }
+}
+
+@media (max-width: 559px) {
+  .about-intro__copy {
+    font-size: 20px;
+  }
+
+  .about-intro__photo {
+    aspect-ratio: 4 / 5;
+  }
+}

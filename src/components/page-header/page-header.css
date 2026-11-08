@@ -1,0 +1,11 @@
+.page-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 760px;
+}
+
+.page-header .description {
+  font-size: 16px;
+  line-height: 1.7;
+}

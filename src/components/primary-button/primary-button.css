@@ -1,0 +1,28 @@
+.primary-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: auto;
+  height: 40px;
+  padding: 0 10px;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--background);
+  background-color: var(--foreground);
+  border: 1px solid var(--foreground);
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  --btn-dotted-color: var(--foreground);
+}
+
+.primary-button:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 2px;
+}
+
+.primary-button__icon {
+  flex-shrink: 0;
+}

@@ -1,0 +1,59 @@
+/* Page wrapper shared by the Projects, Posts and detail pages. */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 75%;
+  margin: 0 auto;
+  padding: 64px 0;
+}
+
+/* Narrower block, centered: keeps 3 cards in a row from growing too large. */
+.page-container--md {
+  max-width: 960px;
+}
+
+/* Wider block for the detail pages (single project / single post). */
+.page-container--lg {
+  max-width: 1120px;
+}
+
+/* Tablet: detail pages use almost the full width. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .page-container--lg {
+    width: calc(100% - 64px);
+  }
+}
+
+@media (max-width: 767px) {
+  .page-container {
+    width: calc(100% - 32px);
+    padding: 40px 0;
+  }
+}
+
+/* "More notes" block under a note (same look as Related projects / Keep reading). */
+.related-notes {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 32px;
+  border-top: 1px dashed var(--border-strong);
+}
+
+.related-notes__title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+/* Reading column: comfortable ~65 character measure, centered in the page block. */
+.post-article {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}

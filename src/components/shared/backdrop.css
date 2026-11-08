@@ -1,0 +1,22 @@
+/*
+ * The page backdrop (white/grey fade + grid), used by the fixed Background.
+ * Grid size comes from --grid-width / --grid-height in globals.css.
+ */
+.backdrop-surface {
+  background-color: var(--background);
+  background-image:
+    linear-gradient(to right, var(--grid-color) var(--grid-line), transparent var(--grid-line)),
+    linear-gradient(to bottom, var(--grid-color) var(--grid-line), transparent var(--grid-line)),
+    linear-gradient(
+      60deg,
+      var(--background-tint) 0%,
+      var(--background-tint) 35%,
+      var(--background) 100%
+    );
+  background-size:
+    var(--grid-width) var(--grid-height),
+    var(--grid-width) var(--grid-height),
+    100vw 100vh;
+  background-position: 0 0;
+  background-repeat: repeat, repeat, no-repeat;
+}

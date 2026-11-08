@@ -1,0 +1,30 @@
+.pull-quote {
+  margin: 0;
+  padding: 4px 0 4px 20px;
+  border-left: 2px solid var(--foreground);
+}
+
+.pull-quote__text {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: var(--foreground);
+}
+
+.pull-quote__author {
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.pull-quote__author::before {
+  content: "— ";
+}
+
+@media (max-width: 559px) {
+  .pull-quote__text {
+    font-size: 19px;
+  }
+}

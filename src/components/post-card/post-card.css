@@ -1,0 +1,158 @@
+/* Outer link: holds the "stacked" dashed outline that appears on hover. */
+.post-card {
+  position: relative;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.post-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border: 1px dashed var(--border-strong);
+  border-radius: 16px;
+  opacity: 0;
+  transform: translate(0, 0);
+  transition:
+    opacity 250ms ease,
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.post-card:hover::after,
+.post-card:focus-visible::after {
+  opacity: 1;
+  transform: translate(6px, 6px);
+}
+
+/* Inner surface: the card itself, with a faint dotted texture. */
+.post-card__surface {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 16px 16px 20px;
+  background-color: var(--background);
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--text-muted) 22%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 16px 16px;
+  border: 1px dashed var(--border-strong);
+  border-radius: 16px;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.post-card:hover .post-card__surface,
+.post-card:focus-visible .post-card__surface {
+  transform: translate(-3px, -3px);
+}
+
+.post-card:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 6px;
+  border-radius: 16px;
+}
+
+.post-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.post-card__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--foreground);
+}
+
+.post-card__arrow {
+  flex-shrink: 0;
+  color: var(--text-muted);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition:
+    opacity 250ms ease,
+    transform 250ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.post-card:hover .post-card__arrow,
+.post-card:focus-visible .post-card__arrow {
+  opacity: 1;
+  transform: none;
+}
+
+.post-card__description {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.post-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 14px;
+  margin: 2px 0 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.post-card__read-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.post-card__media {
+  position: relative;
+  flex-shrink: 0;
+  width: 170px;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--background-tint);
+  border-radius: 10px;
+}
+
+.post-card__image {
+  object-fit: cover;
+}
+
+@media (max-width: 559px) {
+  .post-card__surface {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 14px;
+    padding: 12px 12px 16px;
+  }
+
+  .post-card__media {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .post-card::after,
+  .post-card__surface,
+  .post-card__arrow {
+    transition: none;
+  }
+
+  .post-card:hover .post-card__surface,
+  .post-card:hover::after {
+    transform: none;
+  }
+}

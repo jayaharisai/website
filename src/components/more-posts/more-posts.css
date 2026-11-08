@@ -1,0 +1,14 @@
+.more-posts {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 32px;
+  border-top: 1px dashed var(--border-strong);
+}
+
+.more-posts__title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--foreground);
+}

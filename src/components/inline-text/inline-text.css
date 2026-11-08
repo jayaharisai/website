@@ -1,0 +1,27 @@
+.inline-text__code {
+  padding: 1px 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.85em;
+  color: var(--foreground);
+  background: var(--background-tint);
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+}
+
+.inline-text__link {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--foreground) 35%, transparent);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 200ms ease;
+}
+
+.inline-text__link:hover {
+  text-decoration-color: var(--foreground);
+}
+
+.inline-text__link:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 2px;
+  border-radius: 3px;
+}

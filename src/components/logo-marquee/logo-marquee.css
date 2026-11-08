@@ -1,0 +1,83 @@
+.logo-marquee {
+  position: relative;
+  overflow: hidden;
+  /* Soft fade on both edges so logos slide in and out smoothly. */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+.logo-marquee__track {
+  display: flex;
+  width: max-content;
+  animation: logo-marquee-scroll var(--marquee-duration, 32s) linear infinite;
+}
+
+.logo-marquee:hover .logo-marquee__track {
+  animation-play-state: paused;
+}
+
+.logo-marquee__row {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.logo-marquee__item {
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+}
+
+.logo-marquee__wordmark {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  color: var(--text-muted);
+  transition: color 250ms ease;
+}
+
+.logo-marquee__item:hover .logo-marquee__wordmark {
+  color: var(--foreground);
+}
+
+.logo-marquee__logo {
+  display: block;
+  height: 28px;
+  width: auto;
+  opacity: 0.7;
+  filter: grayscale(1);
+  transition:
+    opacity 250ms ease,
+    filter 250ms ease;
+}
+
+.logo-marquee__item:hover .logo-marquee__logo {
+  opacity: 1;
+  filter: none;
+}
+
+@keyframes logo-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-marquee__track {
+    width: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: none;
+  }
+
+  .logo-marquee__row[aria-hidden="true"] {
+    display: none;
+  }
+}

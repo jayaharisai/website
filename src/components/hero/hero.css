@@ -1,0 +1,26 @@
+/*
+ * Heading is a fixed 42px (extra-bold) on every screen except mobile.
+ * Width and description grow gently on large monitors; tune the clamp() limits.
+ */
+.hero {
+  width: clamp(350px, 30vw, 600px);
+  max-width: 100%;
+}
+
+.hero .heading-1 {
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+
+.hero .description {
+  font-size: clamp(14px, 0.9vw, 18px);
+}
+
+@media (max-width: 559px) {
+  .hero .heading-1 {
+    font-size: 36px;
+  }
+}
