@@ -440,7 +440,7 @@ class UiNavbar extends HTMLElement {
         return a;
       });
       const list = el('div', { className: 'list' }, ...items);
-      if (!items.length) list.append(el('p', { className: 'none', textContent: 'Nothing here yet. Topics will appear as I add them.' }));
+      if (!items.length) list.append(el('p', { className: 'none', textContent: "I’ve just started learning. Come back soon, and whatever I learn I’ll share here." }));
       if (g.all) {
         const all = el('a', { className: 'all', href: g.all, textContent: `Browse all ${g.label.toLowerCase()} →` });
         all.addEventListener('click', (e) => this.#leave(e, g.all));

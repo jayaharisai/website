@@ -49,7 +49,7 @@ function apply() {
   });
   count.textContent = none ? '' : `${shown} of ${cards.length} topics`;
   empty.hidden = shown > 0;
-  if (none) { empty.querySelector('p').textContent = 'Nothing here yet. Topics will appear as I add them.'; empty.querySelector('.reset').hidden = true; }
+  if (none) { empty.querySelector('p').textContent = "I’ve just started learning. Come back soon, and whatever I learn I’ll share here."; empty.querySelector('.reset').hidden = true; }
   $('.clear').hidden = !q;
 }
 

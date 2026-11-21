@@ -16,7 +16,7 @@ const item = group && group.items[idx];
 if (!item) {                                       // nothing to show yet
   document.title = 'LearNew';
   $('.index .side-h').hidden = true;
-  c.append(el('h1', 'topic-title', 'Nothing here yet'), el('p', 'lead-none', 'This topic has not been written. Head back and pick another.'));
+  c.append(el('h1', 'topic-title', 'Still learning this one'), el('p', 'lead-none', 'I haven’t shared this yet. Come back soon, and I’ll add it as I learn.'));
   return;
 }
 
@@ -27,7 +27,7 @@ c.append(el('p', 'crumbs', `<a href="${group.all}">${group.label}</a><span>/</sp
 c.append(el('h1', 'topic-title', item.title));
 c.append(el('div', 'meta-row', [item.tag, SECTIONS.length ? `${SECTIONS.length} sections` : ''].filter(Boolean).map((t) => `<span class="pill">${t}</span>`).join('')));
 if (item.blurb || item.desc) c.append(el('p', 'lead-none', item.blurb || item.desc));
-if (!SECTIONS.length) { c.append(el('p', 'lead-none soft', 'The notes for this topic are on the way.')); $('.index .side-h').hidden = true; }
+if (!SECTIONS.length) { c.append(el('p', 'lead-none soft', 'I’m still learning this one. Come back soon and I’ll share what I find.')); $('.index .side-h').hidden = true; }
 SECTIONS.forEach((s) => c.append(el('section', 'sec', `<h2 id="${s.id}"><a href="#${s.id}">${s.title}</a></h2>${s.html}`)));
 
 const prev = group.items[idx - 1], next = group.items[idx + 1];
