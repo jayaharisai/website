@@ -1,7 +1,0 @@
-.next
-node_modules
-storybook-static
-public
-package-lock.json
-next-env.d.ts
-pnpm-lock.yaml

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Learnings · LearNew</title>
+  <meta name="description" content="Everything I’m learning, gathered in one place. Pick a topic and start anywhere.">
+  <link rel="icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/page.css">
+  <script defer src="data/menu.js"></script>
+  <script defer src="ui/navbar/ui-navbar.js"></script>
+  <script defer src="js/list-page.js"></script>
+</head>
+<body>
+  <ui-navbar brand="LearNew" href="index.html" theme="pro"></ui-navbar>
+  <div class="wrap" data-group="Learnings">
+    <header class="hero">
+      <p class="eyebrow">Library</p>
+      <h1>Learnings</h1>
+      <p class="lede">Everything I’m learning, gathered in one place. Pick a topic and start anywhere.</p>
+    </header>
+
+    <div class="layout">
+      <aside class="side" aria-label="Filters">
+        <p class="side-h">Topics</p>
+        <div class="chips" role="group" aria-label="Filter by topic"></div>
+        <a class="back" href="index.html">← Back home</a>
+      </aside>
+
+      <main class="main">
+        <div class="tools">
+          <label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+            <input id="q" type="search" placeholder="Search learnings…" autocomplete="off" aria-label="Search">
+            <button class="clear" type="button" aria-label="Clear search" hidden>×</button><kbd>/</kbd></label>
+          <p class="meta" aria-live="polite" data-count></p>
+        </div>
+        <div class="grid"></div>
+        <div class="empty" hidden><p>Nothing matches that.</p><button class="reset" type="button">Clear search &amp; filters</button></div>
+      </main>
+    </div>
+  </div>
+  <script defer src="js/page-init.js"></script>
+</body>
+</html>
