@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LearNew</title>
+  <link rel="icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/page.css">
+  <script defer src="data/menu.js"></script>
+  <script defer src="ui/navbar/ui-navbar.js"></script>
+  <script defer src="data/paths.js"></script>
+  <script defer src="js/topic.js"></script>
+  <script defer src="js/page-init.js"></script>
+</head>
+<body class="topic-page">
+  <ui-navbar brand="LearNew" href="index.html" theme="pro"></ui-navbar>
+  <div class="wrap">
+    <div class="layout topic">
+      <aside class="side index" aria-label="Contents">
+        <a class="back" href="learnings.html" data-back>← All learnings</a>
+        <p class="side-h">On this page</p>
+        <nav class="toc"></nav>
+      </aside>
+      <main class="main article">
+        <div class="body-content"></div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
