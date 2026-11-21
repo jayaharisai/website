@@ -10,7 +10,8 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html, body { height: 100%; overflow: hidden; }
+html, body { height: 100%; overflow: hidden; touch-action: none; }
+* { -webkit-tap-highlight-color: transparent; }
 html { scroll-behavior: smooth; scroll-padding-top: 96px; -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;

@@ -29,7 +29,7 @@ class UiBars extends HTMLElement {
   #hx; #hy; #x; #y; #vx; #vy; #s; #len; #seed; #delay; #seg; #bucket;
   #raf = 0; #last = 0; #t0 = null; #reduced = false;
   #mx = -1e4; #my = -1e4; #tx = -1e4; #ty = -1e4; #strength = 0; #want = 0;
-  #waves = []; #ro; #off = []; #lastRipple = 0; #lrx = 0; #lry = 0;
+  #rad = RADIUS; #idle = 0; #waves = []; #ro; #off = []; #lastRipple = 0; #lrx = 0; #lry = 0;
 
   /** strength 1 = click splash, ~0.35 = soft trail ripple */
   #ripple(x, y, k) {
@@ -53,9 +53,13 @@ class UiBars extends HTMLElement {
 
     const on = (t, e, f, o) => { t.addEventListener(e, f, o); this.#off.push(() => t.removeEventListener(e, f, o)); };
     if (!this.#reduced) {
-      on(window, 'pointermove', (e) => {
+      const aim = (e) => {                           // finger or mouse: same black hole, a bit bigger under a finger
+        this.#rad = e.pointerType === 'touch' ? 310 : RADIUS;
         if (this.#want === 0) { this.#mx = e.clientX; this.#my = e.clientY; }
         this.#tx = e.clientX; this.#ty = e.clientY; this.#want = 1;
+      };
+      on(window, 'pointermove', (e) => {
+        aim(e);
         const now = performance.now();
         if (now - this.#lastRipple > 140 && Math.hypot(e.clientX - this.#lrx, e.clientY - this.#lry) > 70) {
           this.#ripple(e.clientX, e.clientY, 0.35); this.#lastRipple = now; this.#lrx = e.clientX; this.#lry = e.clientY;
@@ -63,10 +67,19 @@ class UiBars extends HTMLElement {
       }, { passive: true });
       on(window, 'pointerdown', (e) => {
         if (e.target.closest?.('a,button,ui-navbar')) return;
+        aim(e); this.#lrx = e.clientX; this.#lry = e.clientY;
         this.#ripple(e.clientX, e.clientY, 1);
       }, { passive: true });
+      const lift = (e) => { if (e.pointerType === 'touch') this.#want = 0; };   // finger up: the hole closes
+      on(window, 'pointerup', lift); on(window, 'pointercancel', lift);
       on(document.documentElement, 'pointerleave', () => (this.#want = 0));
       on(window, 'blur', () => (this.#want = 0));
+      if (matchMedia('(pointer: coarse)').matches) {  // touch screens have no hover, so keep the water alive on its own
+        this.#idle = setInterval(() => {
+          if (document.hidden || this.#want) return;
+          this.#ripple(this.#w * (0.15 + Math.random() * 0.7), this.#h * (0.2 + Math.random() * 0.6), 0.55);
+        }, 3200);
+      }
     }
 
     const start = () => { this.#t0 = performance.now(); };
@@ -79,7 +92,7 @@ class UiBars extends HTMLElement {
   }
 
   disconnectedCallback() {
-    cancelAnimationFrame(this.#raf);
+    cancelAnimationFrame(this.#raf); clearInterval(this.#idle);
     this.#ro?.disconnect();
     this.#off.forEach((f) => f()); this.#off = [];
   }
@@ -153,7 +166,7 @@ class UiBars extends HTMLElement {
       if (st > 0.001) {
         rx = hx - mx; ry = hy - my;
         const d = Math.hypot(rx, ry);
-        f = d < RADIUS ? Math.pow(1 - d / RADIUS, 1.4) * st : 0;
+        f = d < this.#rad ? Math.pow(1 - d / this.#rad, 1.4) * st : 0;
       }
       this.#s[i] += (f - this.#s[i]) * kS;
       const s = this.#s[i];

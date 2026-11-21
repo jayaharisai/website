@@ -188,6 +188,16 @@ tpl.innerHTML = `
   :host([open]) .toggle span { transform: translateY(3px) rotate(45deg); }
   :host([open]) .toggle span::before { transform: translateY(-6px) rotate(-90deg); }
 
+  :host, :host * { -webkit-tap-highlight-color: transparent; }
+  /* touch screens have no hover: stop taps from leaving hover colours behind */
+  @media (hover: none) {
+    .item:hover, .item:hover .txt, .item:hover .num, .item:hover strong, .item:hover .arrow, .toggle:hover, .brand:hover .b2 { background-color: transparent; }
+    .item:hover { background: none; } .item:hover .txt { transform: none; } .item:hover .num { color: #a78bfa; } .item:hover .arrow { opacity: 0; }
+    .item:hover strong { background-size: 0 1.5px; } .toggle:hover { background: none; }
+    .item:active { background: #ffffff0d; }
+    .trigger[data-current], .is-open .trigger { color: #fff; }
+    .pill { display: none; }
+  }
   @media (max-width: 760px) {
     .toggle { display: grid; }
     .menu {
