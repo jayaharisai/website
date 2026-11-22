@@ -103,6 +103,9 @@ tpl.innerHTML = `
 
   /* list */
   .list { display: flex; flex-direction: column; padding: 4px 0 0 6px; min-width: 0; }
+  .list.cols { display: grid; grid-template-columns: 1fr 1fr; column-gap: 8px; align-content: start; padding-right: 6px; }
+  .list.cols .all, .list.cols .none { grid-column: 1 / -1; }
+  .latest { grid-column: 1 / -1; margin: 6px 10px 2px; font: 500 11px/1 "JetBrains Mono", ui-monospace, Menlo, monospace; letter-spacing: .08em; text-transform: uppercase; color: #a78bfa; }
   .item {
     position: relative; display: flex; align-items: center; gap: 14px; padding: 11px 10px; border-radius: 12px;
     color: #fff; text-decoration: none;
@@ -226,7 +229,7 @@ tpl.innerHTML = `
     .is-open .panel-inner { visibility: visible; transition-delay: 0s; }
     .wrap { grid-template-columns: 1fr; padding: 0 0 8px; }
     .feature { display: none; }
-    .list { padding: 0; }
+    .list, .list.cols { padding: 0; display: flex; }
     .arrow { display: none; }
   }
 
@@ -441,18 +444,21 @@ class UiNavbar extends HTMLElement {
       const trigger = el('button', { className: 'trigger', type: 'button' }, el('span', { textContent: g.label }), chevron());
       trigger.setAttribute('aria-expanded', 'false'); trigger.setAttribute('aria-controls', panelId);
 
-      const items = g.items.map((it, i) => {
+      /* newest first (new topics are added at the end of the list), capped so the panel stays compact */
+      const shown = g.items.slice(-10).reverse();
+      const items = shown.map((it, i) => {
         const a = el('a', { className: 'item', href: it.href },
-          el('span', { className: 'num', textContent: String(i + 1).padStart(2, '0') }),
+          el('span', { className: 'num', textContent: String(g.items.length - i).padStart(2, '0') }),
           el('span', { className: 'txt' }, el('strong', { textContent: it.title }), el('small', { textContent: it.desc })),
           arrowSvg());
         a.style.setProperty('--i', i);
         return a;
       });
       const list = el('div', { className: 'list' }, ...items);
+      if (items.length) list.prepend(el('p', { className: 'latest', textContent: items.length < g.items.length ? `Latest ${items.length} of ${g.items.length}` : `Latest · ${items.length}` }));
       if (!items.length) list.append(el('p', { className: 'none', textContent: "I’ve just started learning. Come back soon, and whatever I learn I’ll share here." }));
       if (g.all) {
-        const all = el('a', { className: 'all', href: g.all, textContent: `Browse all ${g.label.toLowerCase()} →` });
+        const all = el('a', { className: 'all', href: g.all, textContent: g.items.length > items.length ? `Show all ${g.items.length} ${g.label.toLowerCase()} →` : `Browse all ${g.label.toLowerCase()} →` });
         all.addEventListener('click', (e) => this.#leave(e, g.all));
         list.append(all);
       }
@@ -460,6 +466,7 @@ class UiNavbar extends HTMLElement {
       const glow = el('i', { className: 'glow' });
       const wrap = el('div', { className: 'wrap' }, list);
       if (!g.feature || !g.items.length) wrap.style.gridTemplateColumns = '1fr';
+      if (!g.feature && items.length > 4) list.classList.add('cols');   /* no artwork: use the full width, side by side */
       let feature = null, setSlide = () => {};
       if (g.feature) {
         const f = g.feature;

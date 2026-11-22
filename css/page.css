@@ -101,7 +101,7 @@ h1 { margin: 0; font-size: clamp(2.2rem, 4.6vw, 3.4rem); font-weight: 700; line-
 /* topic page: left index + right content */
 .topic-page .wrap { padding-top: 104px; }
 .topic { grid-template-columns: 250px minmax(0, 1fr); }
-.index { top: 96px; }
+.index { top: 96px; max-height: calc(100vh - 112px); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--line) transparent; padding-bottom: 12px; }
 .index .back { display: inline-block; margin: 0 0 18px; padding: 0; font-weight: 500; }
 .toc { display: flex; flex-direction: column; border-left: 2px solid var(--line); margin-left: 2px; position: relative; }
 .toc a { position: relative; display: flex; gap: 10px; align-items: baseline; padding: 8px 14px; margin-left: -2px; border-left: 2px solid transparent; color: var(--muted); text-decoration: none; font-size: .93rem; font-weight: 500;
@@ -147,7 +147,7 @@ pre { margin: 6px 0 16px; padding: 18px 20px; overflow-x: auto; background: #0f1
 .pn-a:hover { transform: translateY(-3px); border-color: #c7d0f5; box-shadow: 0 12px 26px -14px #4f46e555; } .pn-a:hover b { color: var(--accent); }
 @media (max-width: 860px) {
   .topic { grid-template-columns: 1fr; }
-  .index { position: static; }
+  .index { position: static; max-height: none; overflow: visible; }
   .index .back, .index .side-h { display: block; }
   .toc { flex-direction: row; overflow-x: auto; border-left: 0; gap: 6px; scrollbar-width: none; }
   .toc a { flex: none; margin: 0; border: 1px solid var(--line); border-radius: 999px; background: #fff; padding: 7px 14px; }
@@ -281,3 +281,74 @@ html, body { overflow-x: clip; }
 .rv { opacity: 0; transform: translateY(22px); transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
 .rv.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .rv { opacity: 1; transform: none; transition: none; } }
+
+/* Notes content: numbered lists, subheadings, inline code, tables */
+.sec ol { margin: 0 0 14px; padding-left: 1.4em; color: #333b4d; } .sec ol li::marker { color: var(--accent); font-weight: 600; }
+.sec h3 { margin: 26px 0 10px; font-size: 1.15rem; font-weight: 650; letter-spacing: -.01em; }
+.sec h4 { margin: 18px 0 6px; font-size: 1rem; font-weight: 650; }
+.sec code { padding: 2px 6px; border-radius: 6px; background: #eef0ff; color: #3730a3; font: 500 .88em ui-monospace, Menlo, monospace; }
+.sec pre code { padding: 0; background: none; color: inherit; }
+.sec .tbl { margin: 4px 0 16px; overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; }
+.sec table { width: 100%; border-collapse: collapse; font-size: .93rem; }
+.sec th, .sec td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.sec th { background: #f6f7fb; font-weight: 600; } .sec tr:last-child td { border-bottom: 0; }
+.sec .callout code { background: #ffffffaa; }
+
+/* ---- simple tiles for the Concepts / Learnings lists: no border, very light fill, title only ---- */
+:root { --tile: rgba(79, 70, 229, .06); --tile-hover: rgba(79, 70, 229, .11); }
+.grid { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+.grid > .card { min-height: 0; padding: 18px 20px; border: 0; border-radius: 12px; background: var(--tile); box-shadow: none; overflow: visible;
+  justify-content: center; transition: background .18s, transform .18s cubic-bezier(.22,1,.36,1); }
+.grid > .card .tag, .grid > .card p, .grid > .card .go, .grid > .card::before, .grid > .card::after { display: none; }
+.grid > .card h2 { margin: 0; font-size: 16px; font-weight: 500; line-height: 1.35; letter-spacing: 0; color: var(--ink); }
+.grid > .card:hover, .grid > .card:focus-visible { background: var(--tile-hover); transform: none; box-shadow: none; border-color: transparent; }
+.grid > .card:hover h2 { color: var(--ink); transform: none; }
+.grid > .card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.grid > .card:active { background: var(--tile-hover); transform: scale(.985); }
+@media (hover: none) { .grid > .card:hover { background: var(--tile); } }
+@media (max-width: 560px) { .grid { grid-template-columns: 1fr 1fr; gap: 10px; } .grid > .card { padding: 16px; } }
+
+/* ---- hover card that opens out of a tile (js/card-peek.js) ---- */
+.peek { position: fixed; z-index: 60; display: block; color: inherit; text-decoration: none; filter: drop-shadow(0 18px 30px rgba(15, 23, 42, .16)) drop-shadow(0 2px 4px rgba(15, 23, 42, .08)); }
+.peek-in { display: flex; flex-direction: column; gap: 8px; padding: 20px 22px 18px; background: #fff; border-radius: 14px;
+  clip-path: var(--from, inset(0 round 12px)); transition: clip-path .32s cubic-bezier(.22, 1, .36, 1); }
+.peek.on .peek-in { clip-path: inset(0 round 14px); }
+.peek-tag { align-self: flex-start; padding: 3px 10px; border-radius: 999px; background: var(--tile, #eef0ff); color: var(--accent); font-size: 11px; font-weight: 600; }
+.peek-tag:empty { display: none; }
+.peek h3 { margin: 4px 0 0; font-size: 16px; font-weight: 600; line-height: 1.3; letter-spacing: -.01em; color: var(--ink); }
+.peek p { margin: 0; font-size: 12px; line-height: 1.6; color: var(--muted); }
+.peek-go { margin-top: 6px; align-self: flex-start; font-size: 12px; font-weight: 600; color: var(--accent); }
+.peek:hover .peek-go, .peek:focus-visible .peek-go { text-decoration: underline; text-underline-offset: 3px; }
+.peek:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 14px; }
+@media (prefers-reduced-motion: reduce) { .peek-in { transition: none; } }
+
+/* ---- list pages, simplified: filters in one row, then search, then the tiles; works at every width ---- */
+.layout { display: block; }
+.side { position: static; margin-bottom: 14px; }
+.side-h, .back { display: none; }
+.chips { flex-direction: row; flex-wrap: nowrap; overflow-x: auto; gap: 8px; padding: 2px 0 4px; scrollbar-width: none; margin: 0; }
+.chips::-webkit-scrollbar { display: none; }
+.chip { width: auto; flex: none; gap: 8px; padding: 8px 14px; border: 0; border-radius: 999px; background: var(--tile); color: var(--ink); font-size: 14px; font-weight: 500; box-shadow: none; }
+.chip:hover { background: var(--tile-hover); }
+.chip sup { order: 0; min-width: 0; padding: 0; background: none; color: var(--muted); font-size: 12px; font-weight: 500; }
+.chip[aria-pressed="true"], .chip[aria-pressed="true"]:hover { background: var(--ink); color: #fff; box-shadow: none; }
+.chip[aria-pressed="true"] sup { background: none; color: #ffffffb3; }
+.tools { gap: 12px 20px; margin-bottom: 18px; }
+.search { flex: 1 1 280px; }
+.grid { align-items: start; }
+.grid > .card h2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.grid > .card { min-height: 56px; }
+@media (max-width: 560px) { .tools { gap: 8px; } .meta { width: 100%; } }
+
+/* ---- touch: a tapped tile opens in place ---- */
+.grid.tap > .card { transition: background .18s; }
+.grid.tap > .card.is-open { background: var(--tile-hover); }
+.grid.tap > .card .more { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .28s cubic-bezier(.22,1,.36,1); }
+.grid.tap > .card.is-open .more { grid-template-rows: 1fr; }
+.more-in { min-height: 0; overflow: hidden; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.grid.tap > .card.is-open .more-in { padding-top: 12px; }
+.more-tag { padding: 3px 10px; border-radius: 999px; background: #fff; color: var(--accent); font-size: 11px; font-weight: 600; }
+.more-tag:empty { display: none; }
+.more-text { font-size: 12px; line-height: 1.6; color: var(--muted); }
+.more-open { margin-top: 4px; padding: 10px 16px; border-radius: 8px; background: var(--accent); color: #fff; font-size: 12px; font-weight: 600; }
+@media (prefers-reduced-motion: reduce) { .grid.tap > .card .more { transition: none; } }

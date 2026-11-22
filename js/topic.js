@@ -44,6 +44,11 @@ function spy() {
   heads.forEach((h, i) => { if (h.getBoundingClientRect().top <= y) cur = i; });
   if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) cur = heads.length - 1;
   links.forEach((a, i) => a.classList.toggle('on', i === cur));
+  const box = toc.closest('.index'), on = links[cur];           /* keep the active item visible in the scrolling index */
+  if (box && on && box.scrollHeight > box.clientHeight) {
+    const top = on.getBoundingClientRect().top - box.getBoundingClientRect().top;
+    if (top < 60 || top > box.clientHeight - 60) box.scrollTo({ top: box.scrollTop + top - box.clientHeight / 2, behavior: 'auto' });
+  }
 }
 if (heads.length) { addEventListener('scroll', spy, { passive: true }); addEventListener('resize', spy); spy(); }
 toc.addEventListener('click', (e) => {
