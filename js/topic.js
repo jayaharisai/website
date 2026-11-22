@@ -38,12 +38,21 @@ if (prev || next) c.append(el('div', 'pn',
 /* left: index with scroll-spy */
 SECTIONS.forEach((s, i) => { const a = el('a', '', `<span>${String(i + 1).padStart(2, '0')}</span>${s.title}`); a.href = '#' + s.id; a.dataset.id = s.id; toc.append(a); });
 const links = [...toc.children];
+const idxBox = toc.closest('.index');
+let curLabel = null;
+if (idxBox && SECTIONS.length) {                    /* narrow screens: the index is a dropdown showing the current section */
+  const btn = el('button', 'toc-toggle', '<span class="tt-l">On this page</span><span class="tt-c"></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>');
+  btn.type = 'button'; btn.setAttribute('aria-expanded', 'false');
+  toc.before(btn); curLabel = btn.querySelector('.tt-c'); curLabel.textContent = SECTIONS[0].title;
+  btn.addEventListener('click', () => { const o = idxBox.classList.toggle('open'); btn.setAttribute('aria-expanded', String(o)); });
+}
 const heads = SECTIONS.map((s) => document.getElementById(s.id));
 function spy() {
   const y = innerHeight * .28; let cur = 0;
   heads.forEach((h, i) => { if (h.getBoundingClientRect().top <= y) cur = i; });
   if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) cur = heads.length - 1;
   links.forEach((a, i) => a.classList.toggle('on', i === cur));
+  if (curLabel) curLabel.textContent = SECTIONS[cur].title;
   const box = toc.closest('.index'), on = links[cur];           /* keep the active item visible in the scrolling index */
   if (box && on && box.scrollHeight > box.clientHeight) {
     const top = on.getBoundingClientRect().top - box.getBoundingClientRect().top;
@@ -53,6 +62,7 @@ function spy() {
 if (heads.length) { addEventListener('scroll', spy, { passive: true }); addEventListener('resize', spy); spy(); }
 toc.addEventListener('click', (e) => {
   const a = e.target.closest('a'); if (!a) return;
+  if (idxBox) { idxBox.classList.remove('open'); idxBox.querySelector('.toc-toggle')?.setAttribute('aria-expanded', 'false'); }
   e.preventDefault(); document.getElementById(a.dataset.id).scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
 });
 })();

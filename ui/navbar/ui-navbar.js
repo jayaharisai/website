@@ -205,7 +205,7 @@ tpl.innerHTML = `
     .toggle { display: grid; }
     .menu {
       position: absolute; top: calc(100% + 8px); left: 0; right: 0; margin: 0; padding: 8px;
-      max-height: calc(100dvh - 110px); overflow: auto;
+      max-height: calc(100dvh - 110px); overflow: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
       background: #141414fa; border: 1px solid #ffffff14; border-radius: 14px;
       opacity: 0; visibility: hidden; transform: translateY(-8px) scale(.98); transform-origin: top;
       transition: opacity .25s, transform .4s var(--e), visibility .4s;
@@ -423,6 +423,7 @@ class UiNavbar extends HTMLElement {
       this.#raf = requestAnimationFrame(() => this.toggleAttribute('scrolled', scrollY > 8));
     }, { passive: true });
     on(window, 'hashchange', () => this.#markCurrent());
+    on(window, 'resize', () => { if (!this.#isMobile()) document.documentElement.style.overflow = ''; });
     on(this.#links, 'pointerleave', () => this.#links.classList.remove('hovering'));
 
     this.toggleAttribute('scrolled', scrollY > 8);
@@ -433,6 +434,7 @@ class UiNavbar extends HTMLElement {
   }
 
   disconnectedCallback() {
+    document.documentElement.style.overflow = '';
     this.#off.forEach((f) => f()); this.#off = [];
     clearTimeout(this.#timer); cancelAnimationFrame(this.#raf);
   }
@@ -578,6 +580,7 @@ class UiNavbar extends HTMLElement {
   #setMenu(open) {
     this.toggleAttribute('open', open);
     this.#toggle.setAttribute('aria-expanded', String(open));
+    document.documentElement.style.overflow = open && this.#isMobile() ? 'hidden' : '';   // keep the page still behind the open menu
     if (!open) this.#closeAll();
   }
 
